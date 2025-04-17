@@ -1,24 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# =============================================================================
-#  Version: 1.0 (Decembre 15, 2015)
-#  Author: Wassim Swaileh (wassim.swaileh2@univ-rouen.fr), Normandie University
-#  LITIS lab EA 4108, Campus du Madrillet, 76800 Saint-Étienne-du-Rouvray
-#
-#  Contributors:
-#        Julien Lerouge (Julien.Lerouge@litislab.fr)
-         Fabien Bonardi (fabien.bonardi@litislab.fr)
-# =============================================================================
-#
-#  Syllabifier is distributed in the hope that it will be useful, 
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# =============================================================================
-
 import os, glob, math
 import sys
 import getopt
@@ -33,8 +12,8 @@ import threading
 from threading import Thread
 import time
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 Words_List=[]
 Syllabes_List=[]
@@ -55,7 +34,7 @@ vowels=["a", "e", "i", "o", "u", "y"]
 def findIndex(ltr, elmLst):
     indx=-1
     for i in range(len(elmLst)):
-        if ltr == elmLst[i].decode('utf-8'):
+        if ltr == elmLst[i]: #.decode('utf-8'):
             indx=i
     return indx 
 
@@ -73,7 +52,7 @@ def extractDatasetSymbols(str4, Charc_List, Label_List):
     Cline = Cline+"</s>"
     txt = str4
     if txt == "":
-        print str4
+        print(str4)
     return (Cline, txt)
     
 def separMotsSyllabique(motsy):
@@ -229,8 +208,8 @@ def jaccard_similarity(a, b, vowels):
     ph1 = phonesStructs(a, vowels)
     ph2 = phonesStructs(b, vowels)
 
-    intersection1 = map(operator.eq, a, b).count(True)
-    intersection2 = map(operator.eq, ph1, ph2).count(True)
+    intersection1 = list(map(operator.eq, a, b)).count(True)
+    intersection2 = list(map(operator.eq, ph1, ph2)).count(True)
     if len(a) > len(b):
         union = len(a)
     else:
